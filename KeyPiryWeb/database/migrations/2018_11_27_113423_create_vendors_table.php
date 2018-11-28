@@ -17,6 +17,9 @@ class CreateVendorsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
             $table->string("business_name")->nullable();
+            $table->string("business_phone", 15)->nullable();
+            $table->string("tax_number")->nullable();
+            $table->string("country_code")->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
