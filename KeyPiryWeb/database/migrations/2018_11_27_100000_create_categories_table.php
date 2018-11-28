@@ -13,11 +13,22 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
+        //Schema::enableForeignKeyConstraints();
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('parent');
+            $table->unsignedInteger('parent')->nullable();
+            $table->string('title',191);
+
+            $table->foreign('parent')
+                ->references('id')->on('categories')
+                ->onDelete('set null');
+            //cascade
+            //restrict
+            //set null
             $table->timestamps();
         });
+        //then set autoincrement to 1000
+        DB::update('ALTER TABLE categories AUTO_INCREMENT = 1001;');
     }
 
     /**
