@@ -20,6 +20,7 @@ class CreateSubproductsTable extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2)->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
             $table->foreign('vendor_id')
