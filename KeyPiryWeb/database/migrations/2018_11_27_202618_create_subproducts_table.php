@@ -15,12 +15,23 @@ class CreateSubproductsTable extends Migration
     {
         Schema::create('subproducts', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('vendor_id')->nullable();
+            $table->unsignedInteger('product_id')->nullable();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->integer('vendor_id')->nullable();
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2)->nullable();
             $table->timestamps();
+
+            $table->foreign('vendor_id')
+                ->references('id')->on('vendors')
+                ->onDelete('cascade');
+
+            $table->foreign('product_id')
+                ->references('id')->on('products')
+                ->onDelete('restrict');
         });
+
+        DB::update('ALTER TABLE subproducts AUTO_INCREMENT = 1001;');
     }
 
     /**

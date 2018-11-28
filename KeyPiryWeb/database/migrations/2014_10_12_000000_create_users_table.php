@@ -20,11 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->decimal('balance', 8, 2);
+            $table->decimal('balance', 8, 2)->nullable();
             $table->string('phone',15)->nullable();
             $table->text('billing_address')->nullable();
             $table->timestamp('disabled_until_at')->nullable();
             $table->boolean("isVendor")->default(false);
+            $table->decimal('vendor_balance', 18, 2)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

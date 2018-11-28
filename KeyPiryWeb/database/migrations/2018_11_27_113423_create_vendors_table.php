@@ -15,8 +15,15 @@ class CreateVendorsTable extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->string("business_name")->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('restrict');
         });
+        DB::update('ALTER TABLE vendors AUTO_INCREMENT = 1001;');
     }
 
     /**
