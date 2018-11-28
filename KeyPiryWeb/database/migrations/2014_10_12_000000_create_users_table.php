@@ -23,9 +23,7 @@ class CreateUsersTable extends Migration
             $table->decimal('balance', 8, 2)->nullable();
             $table->string('mobile_number',15)->nullable();
             $table->text('billing_address')->nullable();
-            $table->timestamp('disabled_until_at')->nullable();
             $table->boolean("isVendor")->default(false);
-            $table->decimal('vendor_balance', 18, 2)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

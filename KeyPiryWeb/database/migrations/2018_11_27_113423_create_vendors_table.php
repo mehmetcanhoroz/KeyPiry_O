@@ -20,6 +20,7 @@ class CreateVendorsTable extends Migration
             $table->string("business_phone", 15)->nullable();
             $table->string("tax_number")->nullable();
             $table->string("country_code")->nullable();
+            $table->decimal('vendor_balance', 18, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
