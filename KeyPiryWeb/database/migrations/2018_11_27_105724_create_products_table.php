@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('genre',191)->nullable();
             $table->string('release_date',191)->nullable();
             $table->string('slug',191)->nullable();
+            $table->boolean('status')->default(true);
 
             //$table->dropForeign('products_category_id_foreign');
             $table->foreign('category_id')
