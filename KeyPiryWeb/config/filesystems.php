@@ -55,6 +55,30 @@ return [
             'visibility' => 'public',
         ],
 
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'visibility' => 'public',
+        ],
+
+        'product' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/category'),
+            'visibility' => 'public',
+        ],
+
+        'subproduct' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/listing'),
+            'visibility' => 'public',
+        ],
+
+        'user' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/user'),
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
