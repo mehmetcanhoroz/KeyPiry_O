@@ -1,12 +1,12 @@
 @extends("layouts.backend")
 
 @section("pageTitle")
-    Kategori Oluştur
+    Kategori Düzenle
 @endsection
 
 @section("pageHeaderBreadCrumbs")
     <li><a href="{{route("backend.category.index")}}"><span>Kategoriler</span></a></li>
-    <li><span>Kategori Oluştur</span></li>
+    <li><span>Kategori Düzenle</span></li>
 @endsection
 
 @section("content")
@@ -19,7 +19,7 @@
                         <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
                     </div>
 
-                    <h2 class="card-title">Oluşturma Formu</h2>
+                    <h2 class="card-title">Düzenleme Formu</h2>
                 </header>
                 <div class="card-body">
                     <form class="form-horizontal form-bordered" method="post" id="form" enctype="multipart/form-data">
@@ -43,7 +43,9 @@
                                                for="title">Başlık <span class="required">*</span></label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="title" name="title"
-                                                   placeholder="Kategori Başlığı" required>
+                                                   placeholder="Kategori Başlığı"
+                                                   value="@if(isset($category->title)){{$category->title}}@endif"
+                                                   required>
                                         </div>
                                     </div>
 
@@ -53,7 +55,7 @@
                                         <div class="col-lg-6">
                                             <div class="switch switch-sm switch-success">
                                                 <input type="checkbox" name="status" id="status" data-plugin-ios-switch
-                                                       checked="checked"/>
+                                                        {{$category->status === 1 ? "checked" : ""}}/>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +66,9 @@
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="sort">Sıra
                                             No</label>
                                         <div class="col-lg-6">
-                                            <input type="number" value="0" class="form-control" id="sort" name="sort">
+                                            <input type="number"
+                                                   value="@if(isset($category->sort)){{$category->sort}}@endif"
+                                                   class="form-control" id="sort" name="sort">
                                         </div>
                                     </div>
 
@@ -75,11 +79,15 @@
                                             <select data-plugin-selectTwo class="form-control populate" name="parent">
                                                 <option value="">Ana kategori</option>
 
-                                                @foreach($categories as $category)
+                                                @foreach($categories as $cat)
 
-                                                    <optgroup label="{{$category->title}}">
-                                                        <option value="{{$category->id}}">
-                                                            — {{$category->title}}</option>
+                                                    <optgroup label="{{$cat->title}}">
+                                                        <option {{$cat->id === $category->parent ? "selected" : ""}} value="{{$cat->id}}">
+                                                            — {{$cat->title}}</option>
+                                                        @foreach($cat->subcategories as $subcat)
+                                                            <option value="{{$subcat->id}}">
+                                                                —— {{$subcat->title}}</option>
+                                                        @endforeach
                                                     </optgroup>
                                                 @endforeach
                                             </select>
@@ -94,7 +102,8 @@
                                             <input type="file" name="image" id="image"
                                                    class="form-control form-control-file">
 
-                                            <img src="{{asset('placeholder.png')}}" id="imagePreview" alt=""
+                                            <img src="{{$category->image ? asset("uploads/category/{$category->image}") : asset('placeholder.png')}}"
+                                                 id="imagePreview" alt=""
                                                  style="max-width: 250px; width: 100%" class="mt-3 shadow-lg">
                                         </div>
                                     </div>
@@ -105,7 +114,9 @@
                                             Kelimeler</label>
                                         <div class="col-lg-6">
                                             <input type="text" data-role="tagsinput"
-                                                   data-tag-class="badge badge-primary" class="form-control"
+                                                   data-tag-class="badge badge-primary"
+                                                   value="@if(isset($category->seo_keywords)){{$category->seo_keywords}}@endif"
+                                                   class="form-control"
                                                    id="seo_keywords" placeholder="Virgül ile ayırınız"
                                                    name="seo_keywords">
                                         </div>
@@ -117,7 +128,7 @@
                                         <div class="col-lg-6">
                                             <textarea rows="2" class="form-control" id="seo_description"
                                                       name="seo_description"
-                                                      placeholder="Kategori SEO Açıklaması, Google tarafından gösterilir"></textarea>
+                                                      placeholder="Kategori SEO Açıklaması, Google tarafından gösterilir">@if(isset($category->seo_description)){{$category->seo_description}}@endif</textarea>
                                         </div>
                                     </div>
 
@@ -126,6 +137,7 @@
                                             Başlık</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="seo_title" name="seo_title"
+                                                   value="@if(isset($category->seo_title)){{$category->seo_title}}@endif"
                                                    placeholder="Sekme başlığında gözükecek başlık, boş ise kategori ismi otomatik eklenecektir">
                                         </div>
                                     </div>
@@ -137,7 +149,7 @@
                                     <div class="form-group row">
                                         <div class="col-lg-12">
                                             <textarea rows="15" class="form-control" id="details"
-                                                      name="details"></textarea>
+                                                      name="details">@if(isset($category->details)){{$category->details}}@endif</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +159,7 @@
                             <label class="col-lg-3 control-label text-lg-right pt-2"></label>
                             <div class="col-lg-9">
                                 <button type="submit" class="mb-1 mt-1 mr-1 btn btn-success float-right" id="save">
-                                    Kategoriyi Ekle
+                                    Kategoriyi Kaydet
                                 </button>
                             </div>
                         </div>
@@ -197,7 +209,7 @@
 
             $.ajax({
                 type: "post",
-                url: "{{route("backend.category.createpost")}}",
+                url: "{{route("backend.category.editpost", ["id" => $category->id])}}",
                 data: form,
                 contentType: false,
                 processData: false,

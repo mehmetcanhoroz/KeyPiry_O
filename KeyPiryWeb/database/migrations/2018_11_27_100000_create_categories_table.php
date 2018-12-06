@@ -25,6 +25,11 @@ class CreateCategoriesTable extends Migration
             //cascade
             //restrict
             //set null
+            $table->smallInteger('sort')->default(0);
+            $table->text('seo_keywords')->nullable();
+            $table->text('seo_description')->nullable();
+            $table->string('seo_title')->nullable();
+            $table->longText('details')->nullable();
             $table->timestamps();
         });
         //then set autoincrement to 1000
