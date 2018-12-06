@@ -61,15 +61,21 @@ return [
             'visibility' => 'public',
         ],
 
-        'product' => [
+        'category' => [
             'driver' => 'local',
             'root' => public_path('uploads/category'),
             'visibility' => 'public',
         ],
 
+        'product' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/product'),
+            'visibility' => 'public',
+        ],
+
         'subproduct' => [
             'driver' => 'local',
-            'root' => public_path('uploads/listing'),
+            'root' => public_path('uploads/subproduct'),
             'visibility' => 'public',
         ],
 

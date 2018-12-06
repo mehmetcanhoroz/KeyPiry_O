@@ -18,18 +18,18 @@
                     </a>
                     <ul class="nav nav-children">
                         <li>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{route("backend.category.index")}}">
                                 Kategoriler
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="/">
-                                İlanlar
+                                Ürünler
                             </a>
                         </li>
                         <li>
                             <a class="nav-link" href="/">
-                                Yorumlar
+                                Alt Ürünler
                             </a>
                         </li>
                         <li>

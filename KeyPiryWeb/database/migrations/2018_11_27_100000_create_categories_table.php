@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('parent')->nullable();
             $table->string('title',191)->nullable();
+            $table->text('image')->nullable();
 
             $table->foreign('parent')
                 ->references('id')->on('categories')
@@ -26,6 +27,7 @@ class CreateCategoriesTable extends Migration
             //restrict
             //set null
             $table->smallInteger('sort')->default(0);
+            $table->boolean('status')->default(false);
             $table->text('seo_keywords')->nullable();
             $table->text('seo_description')->nullable();
             $table->string('seo_title')->nullable();

@@ -7,7 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table = "categories";
-    protected $fillable = ["title", "image", "parent", "sort", "seo_keywords", 'seo_description', 'seo_title', 'details', 'status'];
+    protected $fillable =
+        [
+            "title",
+            "image",
+            "parent",
+            "sort",
+            "seo_keywords",
+            'seo_description',
+            'seo_title',
+            'details',
+            'status'
+        ];
 
     public function parent()
     {
