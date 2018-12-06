@@ -51,7 +51,7 @@
 
             <div class="sidebar-header">
                 <div class="sidebar-title">
-                    Navigation
+                    Navigasyon
                 </div>
                 <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed"
                      data-target="html" data-fire-event="sidebar-left-toggle">

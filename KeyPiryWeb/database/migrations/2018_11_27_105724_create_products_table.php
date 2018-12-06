@@ -28,6 +28,11 @@ class CreateProductsTable extends Migration
             $table->string('slug',191)->nullable();
             $table->boolean('status')->default(true);
 
+            $table->text('seo_keywords')->nullable();
+            $table->text('seo_description')->nullable();
+            $table->string('seo_title')->nullable();
+            $table->longText('details')->nullable();
+
             //$table->dropForeign('products_category_id_foreign');
             $table->foreign('category_id')
                 ->references('id')->on('categories')

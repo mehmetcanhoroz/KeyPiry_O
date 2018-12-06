@@ -15,7 +15,7 @@
 
         <form action="pages-search-results.html" class="search nav-form">
             <div class="input-group">
-                <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+                <input type="text" class="form-control" name="q" id="q" placeholder="Arama...">
                 <span class="input-group-append">
 								<button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
 							</span>

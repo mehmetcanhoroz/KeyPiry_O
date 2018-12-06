@@ -85,7 +85,7 @@
                                                         <option {{$cat->id === $category->parent ? "selected" : ""}} value="{{$cat->id}}">
                                                             — {{$cat->title}}</option>
                                                         @foreach($cat->subcategories as $subcat)
-                                                            <option value="{{$subcat->id}}">
+                                                            <option disabled>
                                                                 —— {{$subcat->title}}</option>
                                                         @endforeach
                                                     </optgroup>
@@ -101,7 +101,6 @@
                                         <div class="col-lg-6">
                                             <input type="file" name="image" id="image"
                                                    class="form-control form-control-file">
-
                                             <img src="{{$category->image ? asset("uploads/category/{$category->image}") : asset('placeholder.png')}}"
                                                  id="imagePreview" alt=""
                                                  style="max-width: 250px; width: 100%" class="mt-3 shadow-lg">
@@ -141,10 +140,8 @@
                                                    placeholder="Sekme başlığında gözükecek başlık, boş ise kategori ismi otomatik eklenecektir">
                                         </div>
                                     </div>
-
                                 </div>
                                 <div id="detail" class="tab-pane">
-
 
                                     <div class="form-group row">
                                         <div class="col-lg-12">

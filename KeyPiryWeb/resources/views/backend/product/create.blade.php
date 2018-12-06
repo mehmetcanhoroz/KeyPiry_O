@@ -1,12 +1,12 @@
 @extends("layouts.backend")
 
 @section("pageTitle")
-    Kategori Oluştur
+    Ürün Oluştur
 @endsection
 
 @section("pageHeaderBreadCrumbs")
     <li><a href="{{route("backend.category.index")}}"><span>Kategoriler</span></a></li>
-    <li><span>Kategori Oluştur</span></li>
+    <li><span>Ürün Oluştur</span></li>
 @endsection
 
 @section("content")
@@ -27,7 +27,7 @@
                         <div class="tabs">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#info" data-toggle="tab">Kategori Bilgileri</a>
+                                    <a class="nav-link" href="#info" data-toggle="tab">Ürün Bilgileri</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#seo" data-toggle="tab">SEO</a>
