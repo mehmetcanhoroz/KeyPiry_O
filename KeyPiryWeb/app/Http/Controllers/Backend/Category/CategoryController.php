@@ -94,6 +94,7 @@ class CategoryController extends Controller
             $cat->title = $request->title;
             $cat->sort = $request->sort;
             $cat->parent = $request->parent > 0 ? $request->parent : null;
+            $cat->image = $request->remove_image ? null : $cat->image;
 
             $cat->seo_title = $request->seo_title;
             $cat->seo_keywords = $request->seo_keywords;

@@ -1,11 +1,11 @@
 @extends("layouts.backend")
 
 @section("pageTitle")
-    Kategoriler
+    Ürünler
 @endsection
 
 @section("pageHeaderBreadCrumbs")
-    <li><span>Kategoriler</span></li>
+    <li><span>Ürünler</span></li>
 @endsection
 
 @section("content")
@@ -25,61 +25,36 @@
                             <th style="width: 50px !important;">#</th>
                             <th style="width: 155px ;">Resim</th>
                             <th>Başlık</th>
-                            <th>Üst Kategorisi</th>
-                            <th class="align-content-center text-center" style="width: 50px !important;">Sıra</th>
+                            <th>Kategorisi</th>
                             <th class="align-content-center text-center" style="width: 50px !important;">Durum</th>
                             <th style="width: 85px;">İşlemler</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @foreach($categories as $category)
+                        @foreach($products as $product)
                             <tr>
-                                <td class="primary">{{$category->id}}</td>
+                                <td class="primary">{{$product->id}}</td>
                                 <td><img width="150"
-                                         src="{{$category->image ? asset("uploads/category/{$category->image}"):""}}">
+                                         src="{{$product->image ? asset("uploads/product/{$product->image}"):""}}">
                                 </td>
-                                <td>{{$category->title}}</td>
+                                <td>{{$product->name}}</td>
                                 <td>
-                                    {!! $category->parent ? $category->parent : "<span class='badge badge-success'>Üst Kategori</span>" !!}
+                                    {{$product->category}}
                                 </td>
-                                <td class="align-content-center text-center">{{$category->sort}}</td>
-                                <td class="align-content-center text-center"><span class='badge {{$category->status ? "badge-success" : "badge-danger"}}'>{{$category->status ? "Aktif" : "Pasif"}}</span></td>
+                                <td class="align-content-center text-center"><span
+                                            class='badge {{$product->status ? "badge-success" : "badge-danger"}}'>{{$product->status ? "Aktif" : "Pasif"}}</span>
+                                </td>
                                 <td class="actions-hover actions-fade">
                                     <a class="mb-1 mt-1 mr-1 btn btn-warning text-white"
-                                       href="{{route("backend.category.edit", ["id"=>$category->id])}}"><i
+                                       href="{{route("backend.category.edit", ["id"=>$product->id])}}"><i
                                                 class="fas fa-pencil-alt"></i> </a>
-                                    <a data-id="{{$category}}"
+                                    <a data-id="{{$product}}"
                                        class="mb-1 mt-1 mr-1 btn btn-danger text-white delete"><i
                                                 class="far fa-trash-alt"></i>
                                     </a>
                                 </td>
                             </tr>
-
-
-
-                            @foreach($category->subcategories as $subcategory)
-                                <tr>
-                                    <td class="info">— {{$subcategory->id}}</td>
-                                    <td><img width="150"
-                                             src="{{$subcategory->image ? asset("uploads/category/{$subcategory->image}"):""}}">
-                                    </td>
-                                    <td>{{$subcategory->title}}</td>
-                                    <td>
-                                        <span class='badge badge-danger'>Alt Kategori</span>
-                                    </td>
-                                    <td class="align-content-center text-center">{{$subcategory->sort}}</td>
-                                    <td class="align-content-center text-center"><span class='badge {{$subcategory->status ? "badge-success" : "badge-danger"}}'>{{$subcategory->status ? "Aktif" : "Pasif"}}</span></td>
-                                    <td class="actions-hover actions-fade">
-                                        <a class="mb-1 mt-1 mr-1 btn btn-warning text-white"
-                                           href="{{route("backend.category.edit", ["id"=>$subcategory->id])}}"><i
-                                                    class="fas fa-pencil-alt"></i> </a>
-                                        <a data-id="{{$subcategory}}"
-                                           class="mb-1 mt-1 mr-1 btn btn-danger text-white delete"><i
-                                                    class="far fa-trash-alt"></i> </a>
-                                    </td>
-                                </tr>
-                            @endforeach
 
                         @endforeach
 

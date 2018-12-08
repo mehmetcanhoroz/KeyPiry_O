@@ -20,7 +20,7 @@ class CreateSubproductsTable extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2)->nullable();
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(false);
 
             $table->text('seo_keywords')->nullable();
             $table->text('seo_description')->nullable();

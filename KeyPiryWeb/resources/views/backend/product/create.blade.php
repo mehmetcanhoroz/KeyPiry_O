@@ -27,7 +27,7 @@
                         <div class="tabs">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#info" data-toggle="tab">Ürün Bilgileri</a>
+                                    <a class="nav-link" href="#info" data-toggle="tab">Kategori Bilgileri</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#seo" data-toggle="tab">SEO</a>
@@ -80,10 +80,6 @@
                                                     <optgroup label="{{$category->title}}">
                                                         <option value="{{$category->id}}">
                                                             — {{$category->title}}</option>
-                                                        @foreach($category->subcategories as $subcategory)
-                                                            <option value="{{$subcategory->id}}">
-                                                                —— {{$subcategory->title}}</option>
-                                                        @endforeach
                                                     </optgroup>
                                                 @endforeach
                                             </select>

@@ -101,6 +101,13 @@
                                         <div class="col-lg-6">
                                             <input type="file" name="image" id="image"
                                                    class="form-control form-control-file">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="remove_image">
+                                                    Resimi kaldır
+                                                </label>
+                                            </div>
+
                                             <img src="{{$category->image ? asset("uploads/category/{$category->image}") : asset('placeholder.png')}}"
                                                  id="imagePreview" alt=""
                                                  style="max-width: 250px; width: 100%" class="mt-3 shadow-lg">

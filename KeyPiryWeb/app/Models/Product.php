@@ -25,13 +25,9 @@ class Product extends Model
             'status'
         ];
 
-    public function parent()
+    public function category()
     {
-        return $this->belongsTo(Category::class, "id", "parent");
+        return $this->hasOne(Category::class, "id", "category_id");
     }
 
-    public function subcategories()
-    {
-        return $this->hasMany(Category::class, "parent", "id");
-    }
 }

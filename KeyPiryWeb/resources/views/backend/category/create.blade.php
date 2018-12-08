@@ -80,6 +80,10 @@
                                                     <optgroup label="{{$category->title}}">
                                                         <option value="{{$category->id}}">
                                                             — {{$category->title}}</option>
+                                                        @foreach($category->subcategories as $subcat)
+                                                            <option disabled>
+                                                                —— {{$subcat->title}}</option>
+                                                        @endforeach
                                                     </optgroup>
                                                 @endforeach
                                             </select>

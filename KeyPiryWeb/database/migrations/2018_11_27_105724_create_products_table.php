@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('genre',191)->nullable();
             $table->string('release_date',191)->nullable();
             $table->string('slug',191)->nullable();
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(false);
 
             $table->text('seo_keywords')->nullable();
             $table->text('seo_description')->nullable();
