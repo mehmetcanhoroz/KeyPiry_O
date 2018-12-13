@@ -33,6 +33,8 @@ Route::group(["prefix" => "admin", "as" => "backend", "namespace" => "Backend"],
 
     Route::group(["prefix" => "product", "as" => ".product", "namespace" => "Product"], function () {
         Route::get("/", "ProductController@index")->name(".index");
+        Route::get("/create", "ProductController@create")->name(".create");
+        Route::post("/createpost", "ProductController@createpost")->name(".createpost");
     });
 
     /*Route::group(["prefix" => "category", "as" => ".category", "namespace" => "Category"], function () {

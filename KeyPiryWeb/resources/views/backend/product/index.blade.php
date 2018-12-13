@@ -16,7 +16,7 @@
             <section class="card">
 
                 <div class="card-body">
-                    <a href="{{route("backend.category.create")}}"
+                    <a href="{{route("backend.product.create")}}"
                        class="mb-1 mt-0 mr-1 btn btn-success float-right btn-add-new">Yeni Ekle</a>
                     <table class="table table-responsive-md table-hover mb-0 table-bordered  mb-0"
                            id="datatable-default" data-page-length='25'>
@@ -40,7 +40,7 @@
                                 </td>
                                 <td>{{$product->name}}</td>
                                 <td>
-                                    {{$product->category}}
+                                    {{$product->category->title}}
                                 </td>
                                 <td class="align-content-center text-center"><span
                                             class='badge {{$product->status ? "badge-success" : "badge-danger"}}'>{{$product->status ? "Aktif" : "Pasif"}}</span>
@@ -137,10 +137,17 @@
                         error: function (response) {
                             swal.close();
 
+                            let error = false;
+                            let output = "<span style='color:#f27474'>";
+                            for (property in response.responseJSON.errors) {
+                                output += response.responseJSON.errors[property] + ' <br>';
+                                error = true;
+                            }
+
                             swal({
                                 type: "error",
                                 title: "Hata oluştu!",
-                                text: "Lütfen tekrar deneyin!"
+                                html: (error ? output : "") + (!error ? response.responseJSON.message + "<br>" : "") + "Lütfen tekrar deneyin!"
                             });
                         }
                     })

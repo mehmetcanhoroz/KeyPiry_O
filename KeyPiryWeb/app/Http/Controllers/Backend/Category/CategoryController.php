@@ -15,7 +15,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::with(["parent", "subcategories"])->where("parent", null)->get();
+        $categories = Category::with(["parent", "subcategories"])->where("parent", null)->orderBy('sort')->get();
         return view("backend.category.index", compact("categories"));
     }
 

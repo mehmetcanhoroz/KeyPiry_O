@@ -31,7 +31,6 @@ class CreateProductsTable extends Migration
             $table->text('seo_keywords')->nullable();
             $table->text('seo_description')->nullable();
             $table->string('seo_title')->nullable();
-            $table->longText('details')->nullable();
 
             //$table->dropForeign('products_category_id_foreign');
             $table->foreign('category_id')

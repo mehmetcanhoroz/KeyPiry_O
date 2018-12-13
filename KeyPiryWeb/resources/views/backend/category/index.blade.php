@@ -162,10 +162,17 @@
                         error: function (response) {
                             swal.close();
 
+                            let error = false;
+                            let output = "<span style='color:#f27474'>";
+                            for (property in response.responseJSON.errors) {
+                                output += response.responseJSON.errors[property] + ' <br>';
+                                error = true;
+                            }
+
                             swal({
                                 type: "error",
                                 title: "Hata oluştu!",
-                                text: "Lütfen tekrar deneyin!"
+                                html: (error ? output : "") + (!error ? response.responseJSON.message + "<br>" : "") + "Lütfen tekrar deneyin!"
                             });
                         }
                     })

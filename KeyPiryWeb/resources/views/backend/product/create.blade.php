@@ -5,7 +5,7 @@
 @endsection
 
 @section("pageHeaderBreadCrumbs")
-    <li><a href="{{route("backend.category.index")}}"><span>Kategoriler</span></a></li>
+    <li><a href="{{route("backend.product.index")}}"><span>Ürünler</span></a></li>
     <li><span>Ürün Oluştur</span></li>
 @endsection
 
@@ -27,23 +27,59 @@
                         <div class="tabs">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#info" data-toggle="tab">Kategori Bilgileri</a>
+                                    <a class="nav-link" href="#info" data-toggle="tab">Ürün Bilgileri</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#seo" data-toggle="tab">SEO</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#detail" data-toggle="tab">Kategori Detay</a>
+                                    <a class="nav-link" href="#detail" data-toggle="tab">Ürün Detay</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
                                 <div id="info" class="tab-pane active">
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2"
-                                               for="title">Başlık <span class="required">*</span></label>
+                                               for="name">Başlık <span class="required">*</span></label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="title" name="title"
-                                                   placeholder="Kategori Başlığı" required>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                   placeholder="Ürün Başlığı" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="developer">Geliştirici</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="developer" name="developer"
+                                                   placeholder="Ürün Geliştiricisi">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="publisher">Yayıncı</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="publisher" name="publisher"
+                                                   placeholder="Ürün Yayıncısı">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="genre">Tür</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="genre" name="genre"
+                                                   placeholder="Ürün Türü">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="release_date">Yayınlanma Tarihi</label>
+                                        <div class="col-lg-6">
+                                            <input type="date" class="form-control" id="release_date" name="release_date"
+                                                   placeholder="Ürün Yayınlanma Tarihi">
                                         </div>
                                     </div>
 
@@ -72,14 +108,18 @@
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="parent">Üst
                                             Kategori</label>
                                         <div class="col-lg-6">
-                                            <select data-plugin-selectTwo class="form-control populate" name="parent">
-                                                <option value="">Ana kategori</option>
+                                            <select required data-plugin-selectTwo class="form-control populate" name="category">
+                                                <option value="" disabled>Kategori seçin</option>
 
                                                 @foreach($categories as $category)
 
                                                     <optgroup label="{{$category->title}}">
                                                         <option value="{{$category->id}}">
                                                             — {{$category->title}}</option>
+                                                        @foreach($category->subcategories as $subcategory)
+                                                            <option value="{{$subcategory->id}}">
+                                                                ——x {{$subcategory->title}}</option>
+                                                        @endforeach
                                                     </optgroup>
                                                 @endforeach
                                             </select>
@@ -88,7 +128,7 @@
 
 
                                     <div class="form-group row">
-                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="image">Kategori
+                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="image">Ürün
                                             Resmi</label>
                                         <div class="col-lg-6">
                                             <input type="file" name="image" id="image"
@@ -117,7 +157,7 @@
                                         <div class="col-lg-6">
                                             <textarea rows="2" class="form-control" id="seo_description"
                                                       name="seo_description"
-                                                      placeholder="Kategori SEO Açıklaması, Google tarafından gösterilir"></textarea>
+                                                      placeholder="Ürün SEO Açıklaması, Google tarafından gösterilir"></textarea>
                                         </div>
                                     </div>
 
@@ -126,7 +166,7 @@
                                             Başlık</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="seo_title" name="seo_title"
-                                                   placeholder="Sekme başlığında gözükecek başlık, boş ise kategori ismi otomatik eklenecektir">
+                                                   placeholder="Sekme başlığında gözükecek başlık, boş ise ürün ismi otomatik eklenecektir">
                                         </div>
                                     </div>
 
@@ -136,8 +176,8 @@
 
                                     <div class="form-group row">
                                         <div class="col-lg-12">
-                                            <textarea rows="15" class="form-control" id="details"
-                                                      name="details"></textarea>
+                                            <textarea rows="15" class="form-control" id="description"
+                                                      name="description"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +187,7 @@
                             <label class="col-lg-3 control-label text-lg-right pt-2"></label>
                             <div class="col-lg-9">
                                 <button type="submit" class="mb-1 mt-1 mr-1 btn btn-success float-right" id="save">
-                                    Kategoriyi Ekle
+                                    Ürünü Ekle
                                 </button>
                             </div>
                         </div>
@@ -197,7 +237,7 @@
 
             $.ajax({
                 type: "post",
-                url: "{{route("backend.category.createpost")}}",
+                url: "{{route("backend.product.createpost")}}",
                 data: form,
                 contentType: false,
                 processData: false,
@@ -212,7 +252,7 @@
                             title: response.title,
                             text: response.message,
                         }).then(() => {
-                            location.href = "{{route("backend.category.index")}}";
+                            location.href = "{{route("backend.product.index")}}";
                         });
                     }
                 },
@@ -248,15 +288,15 @@
             }
         });
 
-        var editor = CKEDITOR.replace('details');
+        var editor = CKEDITOR.replace('description');
 
 
         editor.on('blur', function (evt) {
-            document.getElementById("details").innerHTML = editor.getData();
+            document.getElementById("description").innerHTML = editor.getData();
         });
 
         editor.on('change', function () {
-            document.getElementById("details").innerHTML = editor.getData();
+            document.getElementById("description").innerHTML = editor.getData();
         });
     </script>
 
