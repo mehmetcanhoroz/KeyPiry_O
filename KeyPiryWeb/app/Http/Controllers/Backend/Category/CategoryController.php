@@ -81,6 +81,7 @@ class CategoryController extends Controller
             $categories = Category::all();
             return view("backend.category.edit", compact("category", "categories"));
         } catch (\Exception $e) {
+            abort(404);
             return response()->json(["title" => "Hata Oluştu!", "message" => "Kategori bulunamadı!", 'more' => $e->getMessage()], 500);
         }
     }

@@ -40,7 +40,13 @@
                                 </td>
                                 <td>{{$product->name}}</td>
                                 <td>
-                                    {{$product->category->title}}
+                                    @if(empty($product->category))
+                                        <div class="alert alert-danger">
+                                            <strong>Dikkat!</strong> Kategorisi yok.
+                                        </div>
+                                    @else
+                                        {{$product->category->title}}
+                                    @endif
                                 </td>
                                 <td class="align-content-center text-center"><span
                                             class='badge {{$product->status ? "badge-success" : "badge-danger"}}'>{{$product->status ? "Aktif" : "Pasif"}}</span>
@@ -110,7 +116,7 @@
 
                     $.ajax({
                         type: "post",
-                        url: "{{route("backend.category.delete")}}",
+                        url: "{{route("backend.product.delete")}}",
                         data: {
                             _token: "{{csrf_token()}}",
                             id: button.data("id").id
