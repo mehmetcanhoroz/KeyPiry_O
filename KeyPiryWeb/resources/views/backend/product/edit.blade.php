@@ -1,12 +1,12 @@
 @extends("layouts.backend")
 
 @section("pageTitle")
-    Kategori Düzenle
+    Ürün Düzenle
 @endsection
 
 @section("pageHeaderBreadCrumbs")
-    <li><a href="{{route("backend.category.index")}}"><span>Kategoriler</span></a></li>
-    <li><span>Kategori Düzenle</span></li>
+    <li><a href="{{route("backend.product.index")}}"><span>Ürünler</span></a></li>
+    <li><span>Ürün Düzenle</span></li>
 @endsection
 
 @section("content")
@@ -27,13 +27,13 @@
                         <div class="tabs">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#info" data-toggle="tab">Kategori Bilgileri</a>
+                                    <a class="nav-link" href="#info" data-toggle="tab">Ürün Bilgileri</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#seo" data-toggle="tab">SEO</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#detail" data-toggle="tab">Kategori Detay</a>
+                                    <a class="nav-link" href="#detail" data-toggle="tab">Ürün Detay</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -44,8 +44,48 @@
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="title" name="title"
                                                    placeholder="Kategori Başlığı"
-                                                   value="@if(isset($category->title)){{$category->title}}@endif"
+                                                   value="@if(isset($obj->name)){{$obj->name}}@endif"
                                                    required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="developer">Geliştirici</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="developer" name="developer"
+                                                   value="@if(isset($obj->developer)){{$obj->developer}}@endif"
+                                                   placeholder="Ürün Geliştiricisi">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="publisher">Yayıncı</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="publisher" name="publisher"
+                                                   value="@if(isset($obj->publisher)){{$obj->publisher}}@endif"
+                                                   placeholder="Ürün Yayıncısı">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="genre">Tür</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="genre" name="genre"
+                                                   value="@if(isset($obj->genre)){{$obj->genre}}@endif"
+                                                   placeholder="Ürün Türü">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label text-lg-right pt-2"
+                                               for="release_date">Yayınlanma Tarihi</label>
+                                        <div class="col-lg-6">
+                                            <input type="date" class="form-control" id="release_date" name="release_date"
+                                                   value="@if(isset($obj->release_date)){{$obj->release_date}}@endif"
+                                                   placeholder="Ürün Yayınlanma Tarihi">
                                         </div>
                                     </div>
 
@@ -55,22 +95,12 @@
                                         <div class="col-lg-6">
                                             <div class="switch switch-sm switch-success">
                                                 <input type="checkbox" name="status" id="status" data-plugin-ios-switch
-                                                        {{$category->status === 1 ? "checked" : ""}}/>
+                                                        {{$obj->status === 1 ? "checked" : ""}}/>
                                             </div>
                                         </div>
                                     </div>
 
                                     {{csrf_field()}}
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 control-label text-lg-right pt-2" for="sort">Sıra
-                                            No</label>
-                                        <div class="col-lg-6">
-                                            <input type="number"
-                                                   value="@if(isset($category->sort)){{$category->sort}}@endif"
-                                                   class="form-control" id="sort" name="sort">
-                                        </div>
-                                    </div>
 
                                     <div class="form-group row">
                                         <label class="col-lg-3 control-label text-lg-right pt-2" for="parent">Üst
@@ -82,7 +112,7 @@
                                                 @foreach($categories as $cat)
 
                                                     <optgroup label="{{$cat->title}}">
-                                                        <option {{$cat->id === $category->parent ? "selected" : ""}} value="{{$cat->id}}">
+                                                        <option {{$cat->id === $obj->category_id ? "selected" : ""}} value="{{$cat->id}}">
                                                             — {{$cat->title}}</option>
                                                         @foreach($cat->subcategories as $subcat)
                                                             <option disabled>
@@ -108,7 +138,7 @@
                                                 </label>
                                             </div>
 
-                                            <img src="{{$category->image ? asset("uploads/category/{$category->image}") : asset('placeholder.png')}}"
+                                            <img src="{{$obj->image ? asset("uploads/product/{$obj->image}") : asset('placeholder.png')}}"
                                                  id="imagePreview" alt=""
                                                  style="max-width: 250px; width: 100%" class="mt-3 shadow-lg">
                                         </div>
@@ -121,7 +151,7 @@
                                         <div class="col-lg-6">
                                             <input type="text" data-role="tagsinput"
                                                    data-tag-class="badge badge-primary"
-                                                   value="@if(isset($category->seo_keywords)){{$category->seo_keywords}}@endif"
+                                                   value="@if(isset($obj->seo_keywords)){{$obj->seo_keywords}}@endif"
                                                    class="form-control"
                                                    id="seo_keywords" placeholder="Virgül ile ayırınız"
                                                    name="seo_keywords">
@@ -134,7 +164,7 @@
                                         <div class="col-lg-6">
                                             <textarea rows="2" class="form-control" id="seo_description"
                                                       name="seo_description"
-                                                      placeholder="Kategori SEO Açıklaması, Google tarafından gösterilir">@if(isset($category->seo_description)){{$category->seo_description}}@endif</textarea>
+                                                      placeholder="Kategori SEO Açıklaması, Google tarafından gösterilir">@if(isset($obj->seo_description)){{$obj->seo_description}}@endif</textarea>
                                         </div>
                                     </div>
 
@@ -143,7 +173,7 @@
                                             Başlık</label>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" id="seo_title" name="seo_title"
-                                                   value="@if(isset($category->seo_title)){{$category->seo_title}}@endif"
+                                                   value="@if(isset($obj->seo_title)){{$obj->seo_title}}@endif"
                                                    placeholder="Sekme başlığında gözükecek başlık, boş ise kategori ismi otomatik eklenecektir">
                                         </div>
                                     </div>
@@ -153,7 +183,7 @@
                                     <div class="form-group row">
                                         <div class="col-lg-12">
                                             <textarea rows="15" class="form-control" id="details"
-                                                      name="details">@if(isset($category->details)){{$category->details}}@endif</textarea>
+                                                      name="details">@if(isset($obj->description)){{$obj->description}}@endif</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +193,7 @@
                             <label class="col-lg-3 control-label text-lg-right pt-2"></label>
                             <div class="col-lg-9">
                                 <button type="submit" class="mb-1 mt-1 mr-1 btn btn-success float-right" id="save">
-                                    Kategoriyi Kaydet
+                                    Ürünü Kaydet
                                 </button>
                             </div>
                         </div>
@@ -213,7 +243,7 @@
 
             $.ajax({
                 type: "post",
-                url: "{{route("backend.category.editpost", ["id" => $category->id])}}",
+                url: "{{route("backend.category.editpost", ["id" => $obj->id])}}",
                 data: form,
                 contentType: false,
                 processData: false,
@@ -228,7 +258,7 @@
                             title: response.title,
                             text: response.message,
                         }).then(() => {
-                            location.href = "{{route("backend.category.index")}}";
+                            location.href = "{{route("backend.product.index")}}";
                         });
                     }
                 },
@@ -259,7 +289,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     $("#imagePreview").attr("src", e.target.result);
-                }
+                };
                 reader.readAsDataURL(input.files[0]);
             }
         });

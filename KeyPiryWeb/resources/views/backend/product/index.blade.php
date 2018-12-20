@@ -53,7 +53,7 @@
                                 </td>
                                 <td class="actions-hover actions-fade">
                                     <a class="mb-1 mt-1 mr-1 btn btn-warning text-white"
-                                       href="{{route("backend.category.edit", ["id"=>$product->id])}}"><i
+                                       href="{{route("backend.product.edit", ["id"=>$product->id])}}"><i
                                                 class="fas fa-pencil-alt"></i> </a>
                                     <a data-id="{{$product}}"
                                        class="mb-1 mt-1 mr-1 btn btn-danger text-white delete"><i

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Backend\Category;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CategoryCreate;
 use App\Http\Requests\Backend\CategoryEdit;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CategoryController extends Controller
 {
@@ -43,8 +42,10 @@ class CategoryController extends Controller
 
             $file = null;
             if ($request->file("image") != null) {
-                $file = Storage::disk("category")->putFileAs("", $request->file("image"), $request->file("image")->getClientOriginalName());
-                $cat->image = $request->file("image")->getClientOriginalName();
+                $uniq = uniqid() . "_";
+                $file_name = $uniq . $request->file("image")->getClientOriginalName();
+                $file = Storage::disk("category")->putFileAs("", $request->file("image"), $file_name);
+                $cat->image = $file_name;
             }
 
             if ($cat->save()) {
