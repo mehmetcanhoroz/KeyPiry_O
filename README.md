@@ -1,5 +1,5 @@
 # KeyPiry
-Global Key Trade platform for apps and games
+Global Key Trade platform for apps and games with multi vendors platform
 
 ## How to use
 ## Set up backend
