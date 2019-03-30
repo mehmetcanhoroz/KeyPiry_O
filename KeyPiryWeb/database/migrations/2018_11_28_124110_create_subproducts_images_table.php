@@ -14,9 +14,9 @@ class CreateSubproductsImagesTable extends Migration
     public function up()
     {
         Schema::create('subproducts_images', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('image')->nullable();
-            $table->unsignedInteger('subproduct_id')->nullable();
+            $table->unsignedBigInteger('subproduct_id')->nullable();
             $table->timestamps();
 
             $table->foreign('subproduct_id')

@@ -14,8 +14,8 @@ class CreateUsersDisablesTable extends Migration
     public function up()
     {
         Schema::create('users_disables', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamp('disabled_until_at')->nullable();
             $table->text('disabled_reason')->nullable();
             $table->timestamps();

@@ -14,9 +14,9 @@ class CreateSubproductsTable extends Migration
     public function up()
     {
         Schema::create('subproducts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('vendor_id')->nullable();
-            $table->unsignedInteger('product_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('vendor_id')->nullable();
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2)->nullable();

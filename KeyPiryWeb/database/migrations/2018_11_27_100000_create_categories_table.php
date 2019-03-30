@@ -15,8 +15,8 @@ class CreateCategoriesTable extends Migration
     {
         //Schema::enableForeignKeyConstraints();
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('parent')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('parent')->nullable();
             $table->string('title',191)->nullable();
 
             $table->foreign('parent')
@@ -25,6 +25,7 @@ class CreateCategoriesTable extends Migration
             //cascade
             //restrict
             //set null
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
         //then set autoincrement to 1000

@@ -14,13 +14,14 @@ class CreateVendorsTable extends Migration
     public function up()
     {
         Schema::create('vendors', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string("business_name")->nullable();
             $table->string("business_phone", 15)->nullable();
             $table->string("tax_number")->nullable();
             $table->string("country_code")->nullable();
             $table->decimal('vendor_balance', 18, 2)->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
             $table->foreign('user_id')
