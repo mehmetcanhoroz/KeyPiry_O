@@ -1,2 +1,7 @@
 *.log
 **/logs
+
+# Project files #
+######################
+.idea/
+.vcode/
