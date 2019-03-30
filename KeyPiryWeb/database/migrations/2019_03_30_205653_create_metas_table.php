@@ -15,13 +15,11 @@ class CreateMetasTable extends Migration
     {
         Schema::create('metas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('key', 75)->nullable();
+            $table->string('key', 75)->nullable()->unique();
             $table->text('value')->nullable();
             $table->string('metable_type', 30)->nullable()->default(null);
             $table->unsignedBigInteger('metable_id')->nullable()->default(null);
             $table->timestamps();
-
-            $table->unique(['key']);
         });
     }
 
